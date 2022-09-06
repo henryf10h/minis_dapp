@@ -127,7 +127,7 @@ function App() {
     let totalGasLimit = String(gasLimit * mintAmount);
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
-    setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
+    setFeedback(`Acuñando tus ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
       .mint(mintAmount)
@@ -139,13 +139,13 @@ function App() {
       })
       .once("error", (err) => {
         console.log(err);
-        setFeedback("Sorry, something went wrong please try again later.");
+        setFeedback("Disculpa, por favor intenta mas tarde.");
         setClaimingNft(false);
       })
       .then((receipt) => {
         console.log(receipt);
         setFeedback(
-          `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
+          `WOW, tienes ${CONFIG.NFT_NAME}, para verlos ve a Opensea.io.`
         );
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
@@ -162,8 +162,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 10) {
-      newMintAmount = 10;
+    if (newMintAmount > 7) {
+      newMintAmount = 7;
     }
     setMintAmount(newMintAmount);
   };
@@ -246,12 +246,12 @@ function App() {
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  The sale has ended.
+                  Se acabaron los MINIS.
                 </s.TextTitle>
                 <s.TextDescription
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  You can still find {CONFIG.NFT_NAME} on
+                  Todavia puedes conseguir {CONFIG.NFT_NAME} en
                 </s.TextDescription>
                 <s.SpacerSmall />
                 <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
@@ -263,14 +263,13 @@ function App() {
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  1 {CONFIG.SYMBOL} costs {CONFIG.DISPLAY_COST}{" "}
-                  {CONFIG.NETWORK.SYMBOL}.
+                  Acuña 1 {CONFIG.SYMBOL} gratis.
                 </s.TextTitle>
                 <s.SpacerXSmall />
                 <s.TextDescription
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  Excluding gas fees.
+                  Recuerda que siempre debes pagar gas.
                 </s.TextDescription>
                 <s.SpacerSmall />
                 {blockchain.account === "" ||
@@ -282,7 +281,7 @@ function App() {
                         color: "var(--accent-text)",
                       }}
                     >
-                      Connect to the {CONFIG.NETWORK.NAME} network
+                      Conecta a la red de {CONFIG.NETWORK.NAME}.
                     </s.TextDescription>
                     <s.SpacerSmall />
                     <StyledButton
@@ -292,7 +291,7 @@ function App() {
                         getData();
                       }}
                     >
-                      CONNECT
+                      CONECTAR
                     </StyledButton>
                     {blockchain.errorMsg !== "" ? (
                       <>
@@ -360,7 +359,7 @@ function App() {
                           getData();
                         }}
                       >
-                        {claimingNft ? "BUSY" : "BUY"}
+                        {claimingNft ? "CARGANDO" : "COMPRA"}
                       </StyledButton>
                     </s.Container>
                   </>
@@ -386,9 +385,9 @@ function App() {
               color: "var(--primary-text)",
             }}
           >
-            Please make sure you are connected to the right network (
-            {CONFIG.NETWORK.NAME} Mainnet) and the correct address. Please note:
-            Once you make the purchase, you cannot undo this action.
+            Por favor, asegúrese de estar conectado a la red correcta (
+            {CONFIG.NETWORK.NAME} Mainnet) y la dirección correcta. Tenga en cuenta:
+            Una vez que realizas la compra, no puedes deshacer esta acción.
           </s.TextDescription>
           <s.SpacerSmall />
           <s.TextDescription
@@ -397,9 +396,7 @@ function App() {
               color: "var(--primary-text)",
             }}
           >
-            We have set the gas limit to {CONFIG.GAS_LIMIT} for the contract to
-            successfully mint your NFT. We recommend that you don't lower the
-            gas limit.
+            Hemos fijado el límite de gas en {CONFIG.GAS_LIMIT} para acuñar su NFT correctamente. Le recomendamos que no baje el limite de gas.
           </s.TextDescription>
         </s.Container>
       </s.Container>
